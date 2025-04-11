@@ -66,10 +66,34 @@
             height: 1px;
             background: #eaecef;
         }
+        .highlight-banner {
+            background: #f0fff0;
+            border: 1px solid #4caf50;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .arrow-animation {
+            animation: bounce 2s infinite;
+            display: inline-block;
+            font-size: 24px;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
     </style>
 </head>
 <body>
     <h1>🛒 Amazon Order Loader Bookmarklet</h1>
+    
+    <div class="highlight-banner">
+        <h3 style="margin-top: 0;">📱 Works directly in your browser!</h3>
+        <p><strong>Just drag and drop the button below to your bookmarks bar - no installation needed!</strong></p>
+        <div class="arrow-animation">⬇️</div>
+    </div>
     
     <p>This bookmarklet automatically loads <strong>all your Amazon order history pages</strong> into a single view, no matter where you start: the default order page, a specific year, or a filtered view (like "last 30 days").</p>
     
@@ -99,7 +123,7 @@
 
     <hr>
     
-    <h2>📥 Installation</h2>
+    <h2>📥 Super Simple Installation</h2>
     
     <div class="instructions">
         <h3>1. Quick Drag & Drop Method</h3>
@@ -110,15 +134,20 @@
         <div class="note">
             <p><strong>How to use:</strong> Drag the green button above to your bookmarks bar. If your bookmarks bar isn't visible, press <code>Ctrl+Shift+B</code> (Windows/Chrome) or <code>Cmd+Shift+B</code> (Mac) to show it.</p>
         </div>
+        
+        <div class="highlight-banner">
+            <p><strong>That's it! No installation required!</strong></p>
+            <p>Just visit any Amazon orders page and click your new bookmark.</p>
+        </div>
     </div>
     
     <div class="instructions">
-        <h3>2. Manual Bookmark Creation</h3>
+        <h3>2. Manual Bookmark Creation (Alternative)</h3>
         <ol>
             <li>In your browser, open the bookmarks manager</li>
             <li>Add a <strong>new bookmark</strong></li>
             <li>Set the <strong>name</strong> to: <code>🛒 Load All Amazon Orders</code></li>
-            <li>Set the <strong>URL</strong> to the code from <a href="https://github.com/sabbah13/Amazon-Orders-Loader/blob/main/bookmarklet.js">bookmarklet.js</a></li>
+            <li>Set the <strong>URL</strong> to the code from <a href="https://github.com/sabbah13/amazon-orders-loader/blob/main/bookmarklet.js">bookmarklet.js</a></li>
         </ol>
         <div class="note">
             <p><strong>Note:</strong> Make sure the code starts with <code>javascript:(()=>{...})()</code></p>
@@ -159,7 +188,7 @@
     <h2>🛠 Development</h2>
     <p>To tweak the behavior (e.g., add export to CSV, auto-scroll, or more styling):</p>
     <ul>
-        <li>Work with <a href="https://github.com/sabbah13/Amazon-Orders-Loader/blob/main/src/bookmarklet.source.js">src/bookmarklet.source.js</a></li>
+        <li>Work with <a href="https://github.com/sabbah13/amazon-orders-loader/blob/main/src/bookmarklet.source.js">src/bookmarklet.source.js</a></li>
         <li>Then use a minifier like <a href="https://caiorss.github.io/bookmarklet-maker/">Bookmarklet Maker</a> or <a href="https://github.com/terser/terser">Terser</a></li>
         <li>Paste the final one-liner into your bookmark</li>
     </ul>
@@ -172,14 +201,14 @@
     <hr>
     
     <h2>🙋‍♀️ Support</h2>
-    <p>If you find a bug or want to suggest an enhancement, feel free to open an <a href="https://github.com/sabbah13/Amazon-Orders-Loader/issues">issue</a> or PR.</p>
+    <p>If you find a bug or want to suggest an enhancement, feel free to open an <a href="https://github.com/sabbah13/amazon-orders-loader/issues">issue</a> or PR.</p>
 
     <hr>
     
     <p>Enjoy your full-order history with one click! 🎉</p>
     
     <footer style="margin-top: 50px; text-align: center; color: #586069; border-top: 1px solid #eaecef; padding-top: 20px;">
-        <p>View this project on <a href="https://github.com/sabbah13/Amazon-Orders-Loader">GitHub</a></p>
+        <p>View this project on <a href="https://github.com/sabbah13/amazon-orders-loader">GitHub</a></p>
     </footer>
 </body>
 </html>
