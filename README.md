@@ -33,9 +33,9 @@ It:
 
 ### 💫 Super Simple Installation - Just Drag & Drop!
 
-**Visit our [GitHub Pages site](https://sabbah13.github.io/amazon-orders-loader/) for the easiest installation:**
+**Visit our [Installation Page](https://sabbah13.github.io/amazon-orders-loader/installation/) for the easiest setup:**
 
-1. Go to our GitHub Pages site
+1. Go to the Installation Page
 2. Find the green "🛒 Load Amazon Orders" button
 3. Simply drag this button to your browser's bookmarks bar
 4. That's it! No copying code, no technical setup required!
