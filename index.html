@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Order Loader Bookmarklet</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #24292e;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 { 
+            border-bottom: 1px solid #eaecef;
+            padding-bottom: 0.3em;
+        }
+        h2 {
+            margin-top: 24px;
+            margin-bottom: 16px;
+            font-weight: 600;
+            line-height: 1.25;
+        }
+        .bookmarklet {
+            display: inline-block;
+            padding: 10px 16px;
+            background: #4caf50;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            margin: 20px 0;
+            cursor: move;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .bookmarklet:hover {
+            background: #45a049;
+        }
+        .note {
+            background: #f6f8fa;
+            border-left: 3px solid #0366d6;
+            padding: 16px;
+            margin: 16px 0;
+        }
+        .screenshot {
+            max-width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 20px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .feature-list {
+            padding-left: 20px;
+        }
+        .feature-list li {
+            margin-bottom: 8px;
+        }
+        .instructions {
+            margin-bottom: 30px;
+        }
+        hr {
+            margin: 30px 0;
+            border: 0;
+            height: 1px;
+            background: #eaecef;
+        }
+    </style>
+</head>
+<body>
+    <h1>🛒 Amazon Order Loader Bookmarklet</h1>
+    
+    <p>This bookmarklet automatically loads <strong>all your Amazon order history pages</strong> into a single view, no matter where you start: the default order page, a specific year, or a filtered view (like "last 30 days").</p>
+    
+    <div class="feature-list">
+        <p>It:</p>
+        <ul>
+            <li>✅ Works on any Amazon Orders URL (<code>/your-orders/orders?...</code>)</li>
+            <li>📄 Appends all order cards from all pages onto the same page</li>
+            <li>📊 Shows a <strong>smooth, semi-transparent progress modal</strong></li>
+            <li>🚀 Fades out cleanly when all pages are loaded</li>
+            <li>🛑 Detects when you're on the last page and exits with no unnecessary requests</li>
+        </ul>
+    </div>
+
+    <hr>
+    
+    <h2>✨ Features</h2>
+    <ul class="feature-list">
+        <li>🔍 Automatically discovers how many pages exist (even if hidden under <code>...</code> in pagination)</li>
+        <li>🧠 Starts only from the current page and fetches forward</li>
+        <li>💡 Adaptive to any date filters or pagination</li>
+        <li>💬 Clean console logs for debugging</li>
+        <li>🎨 Beautiful modal UI in the center of the screen</li>
+        <li>⏳ Animated progress bar and dimmed background</li>
+        <li>🧼 Overlay fades away after loading completes</li>
+    </ul>
+
+    <hr>
+    
+    <h2>📥 Installation</h2>
+    
+    <div class="instructions">
+        <h3>1. Quick Drag & Drop Method</h3>
+        <p><strong>Simply drag this button to your bookmarks bar:</strong></p>
+        
+        <a class="bookmarklet" href="javascript:(()=>{const baseHost=location.origin,seenIndexes=new Set(),createOverlay=()=>{let overlay=document.getElementById('amazon-order-loader-overlay');if(overlay)return overlay;overlay=document.createElement('div'),overlay.id='amazon-order-loader-overlay',overlay.style.cssText='position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity 0.5s ease;';const box=document.createElement('div');box.style.cssText='background:#fff;padding:20px 30px;border-radius:10px;font-family:sans-serif;font-size:16px;box-shadow:0 0 20px rgba(0,0,0,0.3);text-align:center;min-width:200px;',box.innerHTML='<div style=\"margin-bottom:10px;\">📦 <strong id=\"amazon-progress-text\">Loading...</strong></div><div style=\"background:#eee;border-radius:5px;overflow:hidden;\"><div id=\"amazon-progress-bar\" style=\"height:10px;width:0;background:#4caf50;transition:width 0.3s ease;\"></div></div>',overlay.appendChild(box),document.body.appendChild(overlay)},updateProgress=(page,total)=>{const text=document.getElementById('amazon-progress-text'),bar=document.getElementById('amazon-progress-bar');text&&(text.textContent=`Loading page ${page} of ${total}`),bar&&(bar.style.width=Math.min(100*(page/total),100)+'%')},hideOverlay=()=>{const overlay=document.getElementById('amazon-order-loader-overlay');overlay&&(overlay.style.opacity='0',setTimeout(()=>{overlay.remove()},1e3))},getCurrentPageNumber=()=>{const li=document.querySelector('ul.a-pagination li.a-selected');if(!li)return null;const n=parseInt(li.textContent.trim(),10);return isNaN(n)?null:n},extractMaxStartIndex=doc=>{let max=0;return[...doc.querySelectorAll('ul.a-pagination li')].forEach(li=>{const a=li.querySelector('a');if(a){const match=a.href.match(/startIndex=(\\d+)/);match&&parseInt(match[1])>max&&(max=parseInt(match[1]))}}),max},buildPageUrl=(doc,targetStartIndex)=>{for(const a of doc.querySelectorAll('ul.a-pagination a'))if(a.href.includes('startIndex=')){const u=new URL(a.href,baseHost);return u.searchParams.set('startIndex',targetStartIndex.toString()),u.toString()}return null},fetchAndInsert=async(startIndex,pageNum,totalPages)=>{const url=buildPageUrl(document,startIndex);if(!url)return console.error('[ERROR] Could not build page URL.'),null;console.log(`[INFO] Fetching page ${pageNum}/${totalPages}: ${url}`);try{const res=await fetch(url,{credentials:'include'});if(!res.ok)throw new Error(`HTTP ${res.status}`);const text=await res.text(),parser=new DOMParser,doc=parser.parseFromString(text,'text/html'),orderCards=doc.querySelectorAll('li.order-card__list');console.log(`[INFO] Found ${orderCards.length} order card(s) on page ${pageNum}`);const last=document.querySelector('li.order-card__list:last-of-type');if(!last)return console.error('[ERROR] Could not find last order card on current page.'),doc;const parent=last.parentNode,next=last.nextSibling;orderCards.forEach(card=>{const clone=card.cloneNode(!0);parent.insertBefore(clone,next)}),console.log(`[SUCCESS] Appended ${orderCards.length} card(s) from page ${pageNum}`),updateProgress(pageNum,totalPages);return doc}catch(e){return console.error(`[ERROR] Failed to fetch or process page ${pageNum}:`,e),null}};const currentPageNumber=getCurrentPageNumber();if(!currentPageNumber)return void console.error('[ERROR] Could not determine the current page number.');const initialDoc=document,maxStartIndexInitial=extractMaxStartIndex(initialDoc),totalPagesEstimateInitial=Math.floor(maxStartIndexInitial/10)+1;let currentStartIndex=10*(currentPageNumber-1)+10,pageNumber=currentPageNumber,maxStartIndex=maxStartIndexInitial,totalPagesEstimate=totalPagesEstimateInitial;console.log(`[INFO] Current page: ${currentPageNumber}`),currentStartIndex>maxStartIndex?(console.log(`[✅ DONE] You're already on the last page (${currentPageNumber}). No additional pages to load.`),null):(console.log(`[INFO] Starting from page: ${pageNumber+1}`),console.log(`[INFO] Initial total page estimate: ${totalPagesEstimate}`),createOverlay(),updateProgress(pageNumber,totalPagesEstimate),async function(){while(currentStartIndex<=maxStartIndex){if(seenIndexes.has(currentStartIndex)){console.warn(`[WARN] Already fetched startIndex=${currentStartIndex}, skipping.`),currentStartIndex+=10;continue}pageNumber++,seenIndexes.add(currentStartIndex);const doc=await fetchAndInsert(currentStartIndex,pageNumber,totalPagesEstimate);if(!doc)break;const newMax=extractMaxStartIndex(doc);newMax>maxStartIndex&&(console.log(`[INFO] Updated maxStartIndex to ${newMax} (was ${maxStartIndex})`),maxStartIndex=newMax,totalPagesEstimate=Math.floor(maxStartIndex/10)+1),currentStartIndex+=10}console.log('[✅ DONE] All future order pages have been loaded.'),updateProgress(totalPagesEstimate,totalPagesEstimate),setTimeout(hideOverlay,3e3)}())})();">🛒 Load Amazon Orders</a>
+        
+        <div class="note">
+            <p><strong>How to use:</strong> Drag the green button above to your bookmarks bar. If your bookmarks bar isn't visible, press <code>Ctrl+Shift+B</code> (Windows/Chrome) or <code>Cmd+Shift+B</code> (Mac) to show it.</p>
+        </div>
+    </div>
+    
+    <div class="instructions">
+        <h3>2. Manual Bookmark Creation</h3>
+        <ol>
+            <li>In your browser, open the bookmarks manager</li>
+            <li>Add a <strong>new bookmark</strong></li>
+            <li>Set the <strong>name</strong> to: <code>🛒 Load All Amazon Orders</code></li>
+            <li>Set the <strong>URL</strong> to the code from <a href="https://github.com/sabbah13/Amazon-Orders-Loader/blob/main/bookmarklet.js">bookmarklet.js</a></li>
+        </ol>
+        <div class="note">
+            <p><strong>Note:</strong> Make sure the code starts with <code>javascript:(()=>{...})()</code></p>
+        </div>
+    </div>
+
+    <hr>
+    
+    <h2>▶️ Usage</h2>
+    <ol>
+        <li>Go to your Amazon Orders page (any of these will work):
+            <ul>
+                <li><code>https://www.amazon.com/your-orders/orders</code></li>
+                <li><code>https://www.amazon.com/your-orders/orders?timeFilter=year-2024</code></li>
+                <li><code>https://www.amazon.com/your-orders/orders?startIndex=10</code></li>
+                <li><code>https://www.amazon.com/your-orders/orders?timeFilter=last30</code></li>
+            </ul>
+        </li>
+        <li><strong>Click your bookmarklet</strong> (the bookmark you created).</li>
+        <li>Watch the progress bar and let it load all your orders from all pages.</li>
+        <li>Once finished, the UI will disappear smoothly — and your page will show everything in one view.</li>
+    </ol>
+
+    <hr>
+    
+    <h2>📷 Screenshots</h2>
+    <h3>🔘 Before loading</h3>
+    <img class="screenshot" src="./screenshots/before-loading.png" alt="Before loading">
+    
+    <h3>📦 While loading</h3>
+    <img class="screenshot" src="./screenshots/while-loading.png" alt="While loading">
+    
+    <h3>✅ After loading is complete</h3>
+    <img class="screenshot" src="./screenshots/after-loading.png" alt="After loading">
+
+    <hr>
+    
+    <h2>🛠 Development</h2>
+    <p>To tweak the behavior (e.g., add export to CSV, auto-scroll, or more styling):</p>
+    <ul>
+        <li>Work with <a href="https://github.com/sabbah13/Amazon-Orders-Loader/blob/main/src/bookmarklet.source.js">src/bookmarklet.source.js</a></li>
+        <li>Then use a minifier like <a href="https://caiorss.github.io/bookmarklet-maker/">Bookmarklet Maker</a> or <a href="https://github.com/terser/terser">Terser</a></li>
+        <li>Paste the final one-liner into your bookmark</li>
+    </ul>
+
+    <hr>
+    
+    <h2>📄 License</h2>
+    <p>MIT — free to use and modify for personal or commercial use.</p>
+
+    <hr>
+    
+    <h2>🙋‍♀️ Support</h2>
+    <p>If you find a bug or want to suggest an enhancement, feel free to open an <a href="https://github.com/sabbah13/Amazon-Orders-Loader/issues">issue</a> or PR.</p>
+
+    <hr>
+    
+    <p>Enjoy your full-order history with one click! 🎉</p>
+    
+    <footer style="margin-top: 50px; text-align: center; color: #586069; border-top: 1px solid #eaecef; padding-top: 20px;">
+        <p>View this project on <a href="https://github.com/sabbah13/Amazon-Orders-Loader">GitHub</a></p>
+    </footer>
+</body>
+</html>
