@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,16 +14,19 @@
             margin: 0 auto;
             padding: 20px;
         }
-        h1 { 
+
+        h1 {
             border-bottom: 1px solid #eaecef;
             padding-bottom: 0.3em;
         }
+
         h2 {
             margin-top: 24px;
             margin-bottom: 16px;
             font-weight: 600;
             line-height: 1.25;
         }
+
         .bookmarklet {
             display: inline-block;
             padding: 10px 16px;
@@ -33,39 +37,47 @@
             border-radius: 4px;
             margin: 20px 0;
             cursor: move;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
+
         .bookmarklet:hover {
             background: #45a049;
         }
+
         .note {
             background: #f6f8fa;
             border-left: 3px solid #0366d6;
             padding: 16px;
             margin: 16px 0;
         }
+
         .screenshot {
             max-width: 100%;
             border: 1px solid #ddd;
             border-radius: 4px;
             margin: 20px 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
+
         .feature-list {
             padding-left: 20px;
         }
+
         .feature-list li {
             margin-bottom: 8px;
         }
+
         .instructions {
             margin-bottom: 30px;
         }
+
         hr {
             margin: 30px 0;
             border: 0;
             height: 1px;
             background: #eaecef;
         }
+
         .highlight-banner {
             background: #f0fff0;
             border: 1px solid #4caf50;
@@ -74,20 +86,37 @@
             margin: 20px 0;
             text-align: center;
         }
+
         .arrow-animation {
             animation: bounce 2s infinite;
             display: inline-block;
             font-size: 24px;
         }
+
         @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-            40% {transform: translateY(-10px);}
-            60% {transform: translateY(-5px);}
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
         }
+
         .install-button {
             margin-top: 20px;
             text-align: center;
         }
+
         .code-box {
             background: #f6f8fa;
             padding: 15px;
@@ -103,17 +132,19 @@
         }
     </style>
 </head>
+
 <body>
     <h1>🛒 Amazon Order Loader Bookmarklet</h1>
-    
+
     <div class="highlight-banner">
         <h3 style="margin-top: 0;">📱 Works directly in your browser!</h3>
         <p><strong>Just drag and drop the button below to your bookmarks bar - no installation needed!</strong></p>
         <div class="arrow-animation">⬇️</div>
     </div>
-    
-    <p>This bookmarklet automatically loads <strong>all your Amazon order history pages</strong> into a single view, no matter where you start: the default order page, a specific year, or a filtered view (like "last 30 days").</p>
-    
+
+    <p>This bookmarklet automatically loads <strong>all your Amazon order history pages</strong> into a single view, no
+        matter where you start: the default order page, a specific year, or a filtered view (like "last 30 days").</p>
+
     <div class="feature-list">
         <p>It:</p>
         <ul>
@@ -126,7 +157,7 @@
     </div>
 
     <hr>
-    
+
     <h2>✨ Features</h2>
     <ul class="feature-list">
         <li>🔍 Automatically discovers how many pages exist (even if hidden under <code>...</code> in pagination)</li>
@@ -139,27 +170,31 @@
     </ul>
 
     <hr>
-    
+
     <h2>📥 Super Simple Installation</h2>
-    
+
     <div class="instructions">
         <h3>1. Quick Drag & Drop Method</h3>
         <p><strong>Simply drag this button to your bookmarks bar:</strong></p>
-        
+
         <div class="install-button">
-            <a class="bookmarklet" href="javascript:(function(){var o=location.origin,s=new Set();function e(){let o=document.getElementById('amazon-order-loader-overlay');if(o)return o;o=document.createElement('div'),o.id='amazon-order-loader-overlay',o.style.cssText='position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity 0.5s ease;';const s=document.createElement('div');return s.style.cssText='background:#fff;padding:20px 30px;border-radius:10px;font-family:sans-serif;font-size:16px;box-shadow:0 0 20px rgba(0,0,0,0.3);text-align:center;min-width:200px;',s.innerHTML='<div style=\"margin-bottom:10px;\">📦 <strong id=\"amazon-progress-text\">Loading...</strong></div><div style=\"background:#eee;border-radius:5px;overflow:hidden;\"><div id=\"amazon-progress-bar\" style=\"height:10px;width:0;background:#4caf50;transition:width 0.3s ease;\"></div></div>',o.appendChild(s),document.body.appendChild(o),o}function t(o,t){const n=document.getElementById('amazon-progress-text'),e=document.getElementById('amazon-progress-bar');n&&(n.textContent='Loading page '+o+' of '+t),e&&(e.style.width=Math.min(100*o/t,100)+'%')}function n(){const o=document.getElementById('amazon-order-loader-overlay');o&&(o.style.opacity='0',setTimeout(function(){o.remove()},1e3))}function r(){const o=document.querySelector('ul.a-pagination li.a-selected');if(!o)return null;const t=parseInt(o.textContent.trim(),10);return isNaN(t)?null:t}function a(o){let t=0;return[...o.querySelectorAll('ul.a-pagination li')].forEach(function(o){const n=o.querySelector('a');if(n){const e=n.href.match(/startIndex=(\d+)/);e&&parseInt(e[1])>t&&(t=parseInt(e[1]))}}),t}function i(o,t){for(const n of o.querySelectorAll('ul.a-pagination a'))if(n.href.includes('startIndex=')){const e=new URL(n.href,o.origin);return e.searchParams.set('startIndex',t.toString()),e.toString()}return null}async function l(n,e,r){const a=i(document,n);if(!a)return console.error('[ERROR] Could not build page URL.'),null;console.log('[INFO] Fetching page '+e+'/'+r+': '+a);try{const i=await fetch(a,{credentials:'include'});if(!i.ok)throw new Error('HTTP '+i.status);const l=await i.text(),c=new DOMParser,u=c.parseFromString(l,'text/html'),d=u.querySelectorAll('li.order-card__list');console.log('[INFO] Found '+d.length+' order card(s) on page '+e);const m=document.querySelector('li.order-card__list:last-of-type');if(!m)return console.error('[ERROR] Could not find last order card on current page.'),u;const f=m.parentNode,g=m.nextSibling;d.forEach(function(o){const t=o.cloneNode(!0);f.insertBefore(t,g)}),console.log('[SUCCESS] Appended '+d.length+' card(s) from page '+e),t(e,r);return u}catch(h){return console.error('[ERROR] Failed to fetch or process page '+e+':',h),null}}const c=r();if(!c)return void console.error('[ERROR] Could not determine the current page number.');const u=document,d=a(u),m=Math.floor(d/10)+1;let f=10*(c-1)+10,g=c;console.log('[INFO] Current page: '+c),f>d?console.log('[✅ DONE] You\'re already on the last page ('+c+'). No additional pages to load.'):(console.log('[INFO] Starting from page: '+(g+1)),console.log('[INFO] Initial total page estimate: '+m),e(),t(g,m),async function(){while(f<=d){if(s.has(f)){console.warn('[WARN] Already fetched startIndex='+f+', skipping.'),f+=10;continue}g++,s.add(f);const o=await l(f,g,m);if(!o)break;const t=a(o);t>d&&(console.log('[INFO] Updated maxStartIndex to '+t+' (was '+d+')'),d=t,m=Math.floor(d/10)+1),f+=10}console.log('[✅ DONE] All future order pages have been loaded.'),t(m,m),setTimeout(n,3e3)}())})();">🛒 Load Amazon Orders</a>
+            <a class="bookmarklet"
+                href="javascript:(function(){var o=location.origin,e=new Set;function t(){let o=document.getElementById('amazon-order-loader-overlay');if(o)return o;o=document.createElement('div'),o.id='amazon-order-loader-overlay',o.style.cssText='position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity 0.5s ease;';const t=document.createElement('div');t.style.cssText='background:#fff;padding:20px 30px;border-radius:10px;font-family:sans-serif;font-size:16px;box-shadow:0 0 20px rgba(0,0,0,0.3);text-align:center;min-width:200px;';t.innerHTML='&lt;div style=&quot;margin-bottom:10px;&quot;&gt;📦 &lt;strong id=&quot;amazon-progress-text&quot;&gt;Loading...&lt;/strong&gt;&lt;/div&gt;&lt;div style=&quot;background:#eee;border-radius:5px;overflow:hidden;&quot;&gt;&lt;div id=&quot;amazon-progress-bar&quot; style=&quot;height:10px;width:0;background:#4caf50;transition:width 0.3s ease;&quot;&gt;&lt;/div&gt;&lt;/div&gt;',o.appendChild(t),document.body.appendChild(o);return o}function n(o,t){const n=document.getElementById('amazon-progress-text'),e=document.getElementById('amazon-progress-bar');n&&(n.textContent='Loading page '+o+' of '+t),e&&(e.style.width=Math.min(100*o/t,100)+'%')}function r(){const o=document.getElementById('amazon-order-loader-overlay');o&&(o.style.opacity='0',setTimeout(function(){o.remove()},1e3))}function a(){const o=document.querySelector('ul.a-pagination li.a-selected');if(!o)return null;const t=parseInt(o.textContent.trim(),10);return isNaN(t)?null:t}function c(o){let t=0;return[...o.querySelectorAll('ul.a-pagination li')].forEach(function(o){const n=o.querySelector('a');if(n){const e=n.href.match(/startIndex=(\\d+)/);e&&parseInt(e[1])>t&&(t=parseInt(e[1]))}}),t}function i(o,t){for(const n of o.querySelectorAll('ul.a-pagination a'))if(n.href.includes('startIndex=')){const e=new URL(n.href,o.origin);return e.searchParams.set('startIndex',t.toString()),e.toString()}return null}async function d(t,n,r){const a=i(document,t);if(!a)return console.error('[ERROR] Could not build page URL.'),null;console.log('[INFO] Fetching page '+n+'/'+r+': '+a);try{const i=await fetch(a,{credentials:'include'});if(!i.ok)throw new Error('HTTP '+i.status);const d=await i.text(),l=new DOMParser,u=l.parseFromString(d,'text/html'),m=u.querySelectorAll('li.order-card__list');console.log('[INFO] Found '+m.length+' order card(s) on page '+n);const p=document.querySelector('li.order-card__list:last-of-type');if(!p)return console.error('[ERROR] Could not find last order card on current page.'),u;const s=p.parentNode,f=p.nextSibling;m.forEach(function(o){const t=o.cloneNode(!0);s.insertBefore(t,f)}),console.log('[SUCCESS] Appended '+m.length+' card(s) from page '+n),n(n,r);return u}catch(y){return console.error('[ERROR] Failed to fetch or process page '+n+':',y),null}}const l=a();if(!l)return void console.error('[ERROR] Could not determine the current page number.');const u=document,m=c(u),p=Math.floor(m/10)+1;let s=10*(l-1)+10,f=l;console.log('[INFO] Current page: '+l),s>m?console.log('[✅ DONE] You\'re already on the last page ('+l+'). No additional pages to load.'):(console.log('[INFO] Starting from page: '+(f+1)),console.log('[INFO] Initial total page estimate: '+p),t(),n(f,p),async function(){while(s<=m){if(e.has(s)){console.warn('[WARN] Already fetched startIndex='+s+', skipping.'),s+=10;continue}f++,e.add(s);const o=await d(s,f,p);if(!o)break;const t=c(o);t>m&&(console.log('[INFO] Updated maxStartIndex to '+t+' (was '+m+')'),m=t,p=Math.floor(m/10)+1),s+=10}console.log('[✅ DONE] All future order pages have been loaded.'),n(p,p),setTimeout(r,3e3)}()})();">🛒
+                Load Amazon Orders</a>
         </div>
-        
+
         <div class="note">
-            <p><strong>How to use:</strong> Drag the green button above to your bookmarks bar. If your bookmarks bar isn't visible, press <code>Ctrl+Shift+B</code> (Windows/Chrome) or <code>Cmd+Shift+B</code> (Mac) to show it.</p>
+            <p><strong>How to use:</strong> Drag the green button above to your bookmarks bar. If your bookmarks bar
+                isn't visible, press <code>Ctrl+Shift+B</code> (Windows/Chrome) or <code>Cmd+Shift+B</code> (Mac) to
+                show it.</p>
         </div>
-        
+
         <div class="highlight-banner">
             <p><strong>That's it! No installation required!</strong></p>
             <p>Just visit any Amazon orders page and click your new bookmark.</p>
         </div>
     </div>
-    
+
     <div class="instructions">
         <h3>2. Manual Bookmark Creation (Alternative)</h3>
         <ol>
@@ -168,16 +203,16 @@
             <li>Set the <strong>name</strong> to: <code>🛒 Load All Amazon Orders</code></li>
             <li>Set the <strong>URL</strong> to the bookmarklet code:</li>
         </ol>
-        
-        <div class="code-box">javascript:(function(){const baseHost=location.origin;const seenIndexes=new Set();function createOverlay(){let overlay=document.getElementById('amazon-order-loader-overlay');if(overlay)return overlay;overlay=document.createElement('div');overlay.id='amazon-order-loader-overlay';overlay.style.cssText='position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity 0.5s ease;';const box=document.createElement('div');box.style.cssText='background:#fff;padding:20px 30px;border-radius:10px;font-family:sans-serif;font-size:16px;box-shadow:0 0 20px rgba(0,0,0,0.3);text-align:center;min-width:200px;';box.innerHTML='<div style=\"margin-bottom:10px;\">📦 <strong id=\"amazon-progress-text\">Loading...</strong></div><div style=\"background:#eee;border-radius:5px;overflow:hidden;\"><div id=\"amazon-progress-bar\" style=\"height:10px;width:0;background:#4caf50;transition:width 0.3s ease;\"></div></div>';overlay.appendChild(box);document.body.appendChild(overlay);return overlay;}function updateProgress(page,total){const text=document.getElementById('amazon-progress-text');const bar=document.getElementById('amazon-progress-bar');if(text){text.textContent=`Loading page ${page} of ${total}`;}if(bar){bar.style.width=Math.min(100*(page/total),100)+'%';}}function hideOverlay(){const overlay=document.getElementById('amazon-order-loader-overlay');if(overlay){overlay.style.opacity='0';setTimeout(()=>{overlay.remove();},1000);}}function getCurrentPageNumber(){const li=document.querySelector('ul.a-pagination li.a-selected');if(!li)return null;const n=parseInt(li.textContent.trim(),10);return isNaN(n)?null:n;}function extractMaxStartIndex(doc){let max=0;[...doc.querySelectorAll('ul.a-pagination li')].forEach(li=>{const a=li.querySelector('a');if(a){const match=a.href.match(/startIndex=(\\d+)/);if(match&&parseInt(match[1])>max){max=parseInt(match[1]);}}});return max;}function buildPageUrl(doc,targetStartIndex){for(const a of doc.querySelectorAll('ul.a-pagination a')){if(a.href.includes('startIndex=')){const u=new URL(a.href,baseHost);u.searchParams.set('startIndex',targetStartIndex.toString());return u.toString();}}return null;}async function fetchAndInsert(startIndex,pageNum,totalPages){const url=buildPageUrl(document,startIndex);if(!url){console.error('[ERROR] Could not build page URL.');return null;}console.log(`[INFO] Fetching page ${pageNum}/${totalPages}: ${url}`);try{const res=await fetch(url,{credentials:'include'});if(!res.ok)throw new Error(`HTTP ${res.status}`);const text=await res.text();const parser=new DOMParser();const doc=parser.parseFromString(text,'text/html');const orderCards=doc.querySelectorAll('li.order-card__list');console.log(`[INFO] Found ${orderCards.length} order card(s) on page ${pageNum}`);const last=document.querySelector('li.order-card__list:last-of-type');if(!last){console.error('[ERROR] Could not find last order card on current page.');return doc;}const parent=last.parentNode;const next=last.nextSibling;orderCards.forEach(card=>{const clone=card.cloneNode(true);parent.insertBefore(clone,next);});console.log(`[SUCCESS] Appended ${orderCards.length} card(s) from page ${pageNum}`);updateProgress(pageNum,totalPages);return doc;}catch(e){console.error(`[ERROR] Failed to fetch or process page ${pageNum}:`,e);return null;}}const currentPageNumber=getCurrentPageNumber();if(!currentPageNumber){console.error('[ERROR] Could not determine the current page number.');return;}const initialDoc=document;const maxStartIndexInitial=extractMaxStartIndex(initialDoc);const totalPagesEstimateInitial=Math.floor(maxStartIndexInitial/10)+1;let currentStartIndex=10*(currentPageNumber-1)+10;let pageNumber=currentPageNumber;let maxStartIndex=maxStartIndexInitial;let totalPagesEstimate=totalPagesEstimateInitial;console.log(`[INFO] Current page: ${currentPageNumber}`);if(currentStartIndex>maxStartIndex){console.log(`[✅ DONE] You're already on the last page (${currentPageNumber}). No additional pages to load.`);}else{console.log(`[INFO] Starting from page: ${pageNumber+1}`);console.log(`[INFO] Initial total page estimate: ${totalPagesEstimate}`);createOverlay();updateProgress(pageNumber,totalPagesEstimate);(async function(){while(currentStartIndex<=maxStartIndex){if(seenIndexes.has(currentStartIndex)){console.warn(`[WARN] Already fetched startIndex=${currentStartIndex}, skipping.`);currentStartIndex+=10;continue;}pageNumber++;seenIndexes.add(currentStartIndex);const doc=await fetchAndInsert(currentStartIndex,pageNumber,totalPagesEstimate);if(!doc)break;const newMax=extractMaxStartIndex(doc);if(newMax>maxStartIndex){console.log(`[INFO] Updated maxStartIndex to ${newMax} (was ${maxStartIndex})`);maxStartIndex=newMax;totalPagesEstimate=Math.floor(maxStartIndex/10)+1;}currentStartIndex+=10;}console.log('[✅ DONE] All future order pages have been loaded.');updateProgress(totalPagesEstimate,totalPagesEstimate);setTimeout(hideOverlay,3000);})();}}());</div>
-        
+
+
+
         <div class="note">
             <p><strong>Note:</strong> Make sure the code starts with <code>javascript:(function(){...})()</code></p>
         </div>
     </div>
 
     <hr>
-    
+
     <h2>▶️ Usage</h2>
     <ol>
         <li>Go to your Amazon Orders page (any of these will work):
@@ -194,43 +229,49 @@
     </ol>
 
     <hr>
-    
+
     <h2>📷 Screenshots</h2>
     <h3>🔘 Before loading</h3>
     <img class="screenshot" src="./screenshots/before-loading.png" alt="Before loading">
-    
+
     <h3>📦 While loading</h3>
     <img class="screenshot" src="./screenshots/while-loading.png" alt="While loading">
-    
+
     <h3>✅ After loading is complete</h3>
     <img class="screenshot" src="./screenshots/after-loading.png" alt="After loading">
 
     <hr>
-    
+
     <h2>🛠 Development</h2>
     <p>To tweak the behavior (e.g., add export to CSV, auto-scroll, or more styling):</p>
     <ul>
-        <li>Work with <a href="https://github.com/sabbah13/amazon-orders-loader/blob/main/src/bookmarklet.source.js">src/bookmarklet.source.js</a></li>
-        <li>Then use a minifier like <a href="https://caiorss.github.io/bookmarklet-maker/">Bookmarklet Maker</a> or <a href="https://github.com/terser/terser">Terser</a></li>
+        <li>Work with <a
+                href="https://github.com/sabbah13/amazon-orders-loader/blob/main/src/bookmarklet.source.js">src/bookmarklet.source.js</a>
+        </li>
+        <li>Then use a minifier like <a href="https://caiorss.github.io/bookmarklet-maker/">Bookmarklet Maker</a> or <a
+                href="https://github.com/terser/terser">Terser</a></li>
         <li>Paste the final one-liner into your bookmark</li>
     </ul>
 
     <hr>
-    
+
     <h2>📄 License</h2>
     <p>MIT — free to use and modify for personal or commercial use.</p>
 
     <hr>
-    
+
     <h2>🙋‍♀️ Support</h2>
-    <p>If you find a bug or want to suggest an enhancement, feel free to open an <a href="https://github.com/sabbah13/amazon-orders-loader/issues">issue</a> or PR.</p>
+    <p>If you find a bug or want to suggest an enhancement, feel free to open an <a
+            href="https://github.com/sabbah13/amazon-orders-loader/issues">issue</a> or PR.</p>
 
     <hr>
-    
+
     <p>Enjoy your full-order history with one click! 🎉</p>
-    
-    <footer style="margin-top: 50px; text-align: center; color: #586069; border-top: 1px solid #eaecef; padding-top: 20px;">
+
+    <footer
+        style="margin-top: 50px; text-align: center; color: #586069; border-top: 1px solid #eaecef; padding-top: 20px;">
         <p>View this project on <a href="https://github.com/sabbah13/amazon-orders-loader">GitHub</a></p>
     </footer>
 </body>
+
 </html>
