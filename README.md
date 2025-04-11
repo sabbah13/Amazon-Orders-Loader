@@ -1,5 +1,9 @@
 # 🛒 Amazon Order Loader Bookmarklet
-This bookmarklet automatically loads **all your Amazon order history pages** into a single view, no matter where you start: the default order page, a specific year, or a filtered view (like "last 30 days").
+
+This bookmarklet **works directly in your browser** and automatically loads **all your Amazon order history pages** into a single view, no matter where you start: the default order page, a specific year, or a filtered view (like "last 30 days").
+
+**Installation is as easy as dragging and dropping a link to your bookmarks bar!**
+
 It:
 - ✅ Works on any Amazon Orders URL (`/your-orders/orders?...`)
 - 📄 Appends all order cards from all pages onto the same page
@@ -27,14 +31,20 @@ It:
 ---
 ## 📥 Installation
 
-### 💫 Easiest Method - Use the GitHub Pages Site
-**Visit our [GitHub Pages site](https://sabbah13.github.io/Amazon-Orders-Loader/) for the easiest installation with a drag-and-drop button!**
+### 💫 Super Simple Installation - Just Drag & Drop!
 
-### 1. Manual Bookmark Creation
+**Visit our [GitHub Pages site](https://sabbah13.github.io/amazon-orders-loader/) for the easiest installation:**
+
+1. Go to our GitHub Pages site
+2. Find the green "🛒 Load Amazon Orders" button
+3. Simply drag this button to your browser's bookmarks bar
+4. That's it! No copying code, no technical setup required!
+
+### Manual Alternative
 - In your browser, open the bookmarks manager
 - Add a **new bookmark**
 - Set the **name** to: `🛒 Load All Amazon Orders`
-- Set the **URL** of the bookmark to the code from [`bookmarklet.js`](./bookmarklet.js)
+- Set the **URL** to the code from [`bookmarklet.js`](./bookmarklet.js)
 
 > *Note: Make sure the code starts with *`javascript:(()=>{...})()`
 ---
