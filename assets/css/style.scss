@@ -1,0 +1,80 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+.bookmarklet {
+  display: inline-block;
+  padding: 10px 16px;
+  background: #4caf50;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 4px;
+  margin: 20px 0;
+  cursor: move;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.bookmarklet:hover {
+  background: #45a049;
+  text-decoration: none;
+}
+
+.note {
+  background: #f6f8fa;
+  border-left: 3px solid #0366d6;
+  padding: 16px;
+  margin: 16px 0;
+}
+
+.highlight-banner {
+  background: #f0fff0;
+  border: 1px solid #4caf50;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.arrow-animation {
+  animation: bounce 2s infinite;
+  display: inline-block;
+  font-size: 24px;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+  40% {transform: translateY(-10px);}
+  60% {transform: translateY(-5px);}
+}
+
+.code-box {
+  background: #f6f8fa;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+  font-family: monospace;
+  font-size: 13px;
+  overflow-x: auto;
+  max-height: 200px;
+  overflow-y: auto;
+  margin: 20px 0;
+  white-space: pre;
+}
+
+.instructions {
+  margin-bottom: 30px;
+}
+
+.feature-list li {
+  margin-bottom: 8px;
+}
+
+.screenshot {
+  max-width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin: 20px 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
