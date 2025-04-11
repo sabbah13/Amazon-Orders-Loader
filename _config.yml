@@ -1,0 +1,4 @@
+theme: jekyll-theme-cayman
+title: Amazon Order Loader
+description: A bookmarklet to load all your Amazon orders in one page
+show_downloads: true
