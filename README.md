@@ -21,13 +21,10 @@ It:
 - 🧼 Overlay fades away after loading completes
 ---
 ## 📷 Screenshots
-### 🔘 Before loading
-![Before loading](./screenshots/before-loading.png)
-### 📦 While loading
-![While loading](./screenshots/while-loading.png)
-### ✅ After loading is complete
-![After loading](./screenshots/after-loading.png)
-> *Add your actual screenshots in a *`screenshots/`* folder for best effect.*
+### 📦 Bookmarklet in Action
+![Loading Progress](./screenshots/loading.png)
+
+> *The bookmarklet shows a clear progress indicator while loading.*
 ---
 ## 📥 Installation
 
